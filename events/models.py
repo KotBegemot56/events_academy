@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class Event(models.Model):
-    moderator = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    moderator = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
     image_url = models.CharField(max_length=200, blank=True, null=True)
@@ -26,3 +26,12 @@ class Guest(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+# class MyUserModel(models.Model):
+#     username = models.CharField(max_length=50)
+#     last_name = models.CharField(max_length=50)
+#     email = models.EmailField()
+#     password = models.CharField(max_length=50)
+#
+#     def __str__(self):
+#         return f"{self.username} {self.last_name}"
