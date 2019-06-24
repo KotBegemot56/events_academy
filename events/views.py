@@ -1,8 +1,10 @@
+from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from events.models import Event, Guest
 
-from events.serializers import EventSerializer, EventGuestsSerializer, GuestsSerializer, GuestsViewSerializer
+from events.serializers import EventSerializer, EventGuestsSerializer, GuestsSerializer, GuestsViewSerializer, \
+    UserSerializer
 
 
 class GuestsList(generics.ListCreateAPIView):
@@ -39,7 +41,14 @@ class EventGuests(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Event.objects.all().prefetch_related("guests")
     serializer_class = EventGuestsSerializer
-#
-# class UserListView(generics.ListCreateAPIView):
-#     queryset = MyUserModel.objects.all()
-#     serializer_class = serializers.UserSerializer
+
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserListView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

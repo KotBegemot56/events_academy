@@ -77,7 +77,8 @@ class CustomJWTSerializer(JSONWebTokenSerializer):
             msg = "Account with this email/username does not exists"
             raise serializers.ValidationError(msg)
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = MyUserModel
-#         fields = ('email', 'username')
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guest
+        fields = "__all__"
